@@ -1,10 +1,10 @@
-#setting the seed makes R generate the same "random" numbers as the homework assignment 
+#setting the seed set.seed(15) makes R generate the same "random" numbers as the homework assignment 
 set.seed(15)
 hw2 <- runif(50, 4, 50) 
 hw2 <- replace(hw2, c(4,12,22,27), NA)
 hw2
 
-#now we call the object and return all the values that are not NA
+#now we call the object and return all the values that are not NA with the !is.na function
 hw2[!is.na(hw2)]
 
 #creating an intermediate vector out of that value and naming it noNA
