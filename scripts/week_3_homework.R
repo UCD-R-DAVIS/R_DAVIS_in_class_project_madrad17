@@ -25,6 +25,7 @@ class(surveys.base$plot_type)
 ### from your surveys_base data frame with weights greater than 150g.
 
 challenge_base <- surveys.base[surveys.base$weight>150,]
+challenge_base
 
 
 
