@@ -5,7 +5,7 @@
 library (tidyverse)
 surveys <- read_csv("data/portal_data_joined.csv")
 
-surveys %>%
+surveys_wide <- surveys %>%
   filter(!is.na(hindfoot_length)) %>% 
   group_by(genus, plot_type) %>% 
   summarize(mean_hf_lnth = mean(hindfoot_length)) %>% 
