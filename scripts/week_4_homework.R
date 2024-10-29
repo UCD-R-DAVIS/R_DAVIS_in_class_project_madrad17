@@ -71,7 +71,7 @@ surveys %>%
   filter(!is.na(weight)) %>% 
   group_by(species, sex) %>% 
   summarize(mean_weight = mean(weight)) %>% 
-  arrange(mean_weight)
+
 
 
 ## Take surveys_avg_weight and add a new column called above_average that 
