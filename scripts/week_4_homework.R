@@ -67,14 +67,16 @@ surveys %>%
 # sex, weight, and your new average weight column. 
 # Save this tibble as surveys_avg_weight.
 
-surveys %>% 
+surveys_avg_weight <- surveys %>% 
   filter(!is.na(weight)) %>% 
   group_by(species, sex) %>% 
-  summarize(mean_weight = mean(weight)) %>% 
+  mutate(mean_weight = mean(weight)) %>% 
+  select(species, sex, weight, mean_weight)
 
-
+surveys_avg_weight
 
 ## Take surveys_avg_weight and add a new column called above_average that 
 # contains logical values stating whether or not a row’s weight is above 
 # average for its species+sex combination (recall the new column we made 
 # for this tibble).
+
