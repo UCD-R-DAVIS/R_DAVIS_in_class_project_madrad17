@@ -21,14 +21,22 @@ gapminder %>%
 
 # What is scale_x_log10() achieving? What about geom_smooth()?
 
+#this seems to globally remove scientific notation from the plot... but is it the best way? 
+options(scipen = 999)
 ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
-  #size points in proportion to country population
+  # size points in proportion to country population
   geom_point(aes(color = continent, size = pop)) + 
-  scale_x_log10() +
-  #puts it on a log10 scale so that the distribution is more even
+  scale_x_log10(labels = function(x) format(x, scientific = FALSE)) +
+  # puts it on a log10 scale so that the distribution is more even, 
+  # and also removes scientific notation in the x-axis title with 
+  # labels = function(x) format(x, scientific = FALSE)
   geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') +
-  #inserts a linear regression line per the specified characteristics
-  theme_bw()
+  # inserts a linear regression line per the specified characteristics
+  labs(y = "Life Expectancy", x = "GDP Per Capita", color = "Continent", 
+       size = 'Population', 
+       title = 'Continental Life Expectancy by GDP Per Capita',
+       subtitle = 'From 1952 - 2007') +
+  theme_classic()
 
 
 #boxplot of life expectency in Brazil, China, El Salvador, Niger, and the US
@@ -52,6 +60,16 @@ five_countries <- gapminder %>% filter(
 # alpha of the geom_jitter doesn't seem to change point opacity
   
 view(five_countries)
+
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Week 6 questions
+# What is the options() function doing? 
+# Is there a better way to remove scientific notation from the plot? options()
+# vs. labels = function(x) format(x, scientific = FALSE)
+# Why wasn't alpha adjusting the point opacity? 
+
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
