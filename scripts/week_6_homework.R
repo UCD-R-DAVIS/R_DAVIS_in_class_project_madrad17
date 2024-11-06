@@ -10,9 +10,8 @@ gapminder <- read_csv("https://ucd-r-davis.github.io/R-DAVIS/data/gapminder.csv"
 # changed over time by continent
 
 gapminder %>% 
-  group_by(continent) %>% 
+  group_by(continent, year) %>% 
   summarise(mean_lifeExp = mean(lifeExp)) %>% 
-  ungroup() %>% 
   ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp, color = continent))+
     geom_smooth(aes(color = continent)) +
     labs(y = "Life Expectancy", x = "Year", color = "Continent") +
@@ -48,16 +47,19 @@ five_countries <- gapminder %>% filter(
   country == 'Niger' |
   country == 'United States'
 )
+# is the vector method better here and if so, why? 
   ggplot(data = five_countries, aes(x = country, y = lifeExp)) + 
     geom_boxplot(aes(color = country)) +
-    geom_jitter(aes(alpha = 1/100)) + 
+    geom_jitter(aes(alpha = lifeExp)) + 
     labs(y = "Life Expectancy", x = "Country", color = "Country", 
+         # What if you wanted the country labels to be color coded? 
          title = 'Life Expectancy of Five Countries', 
          subtitle = 'Mean distribution from 1952 - 2007') +
     guides(alpha = FALSE, color = FALSE) +
-    theme_fivethirtyeight()
+    theme_fivethirtyeight() 
+  
     
-# alpha of the geom_jitter doesn't seem to change point opacity
+# alpha of the geom_jitter doesn't seem to change point opacity.. or color
   
 view(five_countries)
 
@@ -69,7 +71,8 @@ view(five_countries)
 # Is there a better way to remove scientific notation from the plot? options()
 # vs. labels = function(x) format(x, scientific = FALSE)
 # Why wasn't alpha adjusting the point opacity? 
-
+# What if you want the x-axis to be color coded? 
+# Is the vector method better for filtering than using filter()? 
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
