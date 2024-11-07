@@ -19,15 +19,16 @@ pop_diff <- gapminder %>% filter(
 
 view(pop_diff)
 
-options(scipen = TRUE)
+options(scipen = 999)
 
-ggplot(data = pop_diff, mapping = aes(x = reorder(country, pop_difference), y = pop_difference)) +
+ggplot(data = pop_diff, mapping = aes(
+  x = reorder(country, pop_difference), 
+  y = pop_difference)) +
   facet_wrap(~continent, scales = "free") +
   geom_col(aes(fill = continent)) +
-  theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1), 
-        strip.background = element_rect(color="black", fill="grey", size=.5, linetype="solid")) +
-  labs(y = 'Change in Population between 2002 and 2007', x = 'Country') +
+  theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1, size = 5), 
+        strip.background = element_rect(color='white', fill='white', size=.5)) +
+  labs(y = 'Population change', x = 'Country', title = 'Country population change between 2002 and 2007') +
   guides(fill = FALSE)
-
 
 
