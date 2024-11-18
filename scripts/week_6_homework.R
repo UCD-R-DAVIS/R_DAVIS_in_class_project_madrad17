@@ -47,16 +47,19 @@ five_countries <- gapminder %>% filter(
   country == 'Niger' |
   country == 'United States'
 )
+
+#another way to do this
+five_countries_2 <- gapminder[gapminder$country %in% c('Brazil','China','El Salvador','Niger','United States'),]
+
 # is the vector method better here and if so, why? 
   ggplot(data = five_countries, aes(x = country, y = lifeExp)) + 
     geom_boxplot(aes(color = country)) +
     geom_jitter(aes(alpha = lifeExp)) + 
     labs(y = "Life Expectancy", x = "Country", color = "Country", 
-         # What if you wanted the country labels to be color coded? 
          title = 'Life Expectancy of Five Countries', 
          subtitle = 'Mean distribution from 1952 - 2007') +
     guides(alpha = FALSE, color = FALSE) +
-    theme_fivethirtyeight() 
+    theme_fivethirtyeight()
   
     
 # alpha of the geom_jitter doesn't seem to change point opacity.. or color
