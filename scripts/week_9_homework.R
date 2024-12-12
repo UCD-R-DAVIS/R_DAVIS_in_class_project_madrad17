@@ -1,4 +1,35 @@
-# Iteration ---------------------------------------------------------------
+surveys <- read.csv("data/portal_data_joined.csv")
+
+# Using a for loop, print to the console the longest species name of each taxon. 
+# Hint: the function nchar() gets you the number of characters in a string.
+
+view(surveys)
+
+taxa_counts <- surveys %>% 
+  group_by(taxa) %>% 
+  summarize(species) %>% 
+  for (i in taxa_counts) {
+    nchar(species)
+    print(i)
+  }
+
+#gave up grrrrrrrrrrr. Your will is weak! 
+
+for(i in unique(surveys$taxa)){
+  mytaxon <- surveys[surveys$taxa == i,]
+  longestnames <- mytaxon[nchar(mytaxon$species) == max(nchar(mytaxon$species)),] %>% select(species)
+  print(paste0("The longest species name(s) among ", i, "s is/are: "))
+  print(unique(longestnames$species))
+}
+
+view(taxa_counts)
+
+#pt 2
+
+mloa <- read_csv("https://raw.githubusercontent.com/ucd-cepb/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
+
+
+# head()# Iteration ---------------------------------------------------------------
 
 # Learning Objectives: 
 ## Understand when and why to iterate code
